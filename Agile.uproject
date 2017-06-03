@@ -2,5 +2,14 @@
 	"FileVersion": 3,
 	"EngineAssociation": "4.16",
 	"Category": "",
-	"Description": ""
+	"Description": "",
+	"TargetPlatforms": [
+		"AllDesktop",
+		"LinuxNoEditor",
+		"MacNoEditor",
+		"PS4",
+		"Switch",
+		"WindowsNoEditor",
+		"XboxOne"
+	]
 }
