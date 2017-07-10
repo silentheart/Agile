@@ -1,0 +1,3 @@
+D:\Github\Agile\Agile\Source\Agile\Agile.Build.cs
+D:\Github\Agile\Agile\Source\Agile.Target.cs
+D:\Github\Agile\Agile\Source\AgileEditor.Target.cs

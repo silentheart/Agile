@@ -1,0 +1,17 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UE4Editor-Agile.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"C:\Program Files\Epic Games\UE_4.16\Engine\Intermediate\Build\Win64\UE4Editor\Development\Engine\SharedPCH.Engine.h.obj"
+"D:\Github\Agile\Agile\Intermediate\Build\Win64\UE4Editor\Development\Agile\Agile.cpp.obj"
+"D:\Github\Agile\Agile\Intermediate\Build\Win64\UE4Editor\Development\Agile\AgileCharacter.cpp.obj"
+"D:\Github\Agile\Agile\Intermediate\Build\Win64\UE4Editor\Development\Agile\AgileGameMode.cpp.obj"
+"D:\Github\Agile\Agile\Intermediate\Build\Win64\UE4Editor\Development\Agile\AgilePlayerController.cpp.obj"
+"D:\Github\Agile\Agile\Intermediate\Build\Win64\UE4Editor\Development\Agile\Agile.generated.cpp.obj"
+"C:\Program Files\Epic Games\UE_4.16\Engine\Intermediate\Build\Win64\UE4Editor\Development\Agile\PCLaunch.rc.res"
+"C:\Program Files\Epic Games\UE_4.16\Engine\Intermediate\Build\Win64\UE4Editor\Development\ModuleVersionResource.rc.inl.res"
+/OUT:"D:\Github\Agile\Agile\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-Agile.lib"
