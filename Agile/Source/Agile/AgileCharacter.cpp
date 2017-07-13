@@ -1,6 +1,7 @@
 // Copyright 1998-2017 Epic Games, Inc. All Rights Reserved.
 
 #include "AgileCharacter.h"
+#include "AI/Navigation/NavigationSystem.h"
 #include "UObject/ConstructorHelpers.h"
 #include "Camera/CameraComponent.h"
 #include "Components/DecalComponent.h"
@@ -60,7 +61,7 @@ void AAgileCharacter::Tick(float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
 
-	if (CursorToWorld != nullptr)
+	/*if (CursorToWorld != nullptr)
 	{
 		if (UHeadMountedDisplayFunctionLibrary::IsHeadMountedDisplayEnabled())
 		{
@@ -84,6 +85,30 @@ void AAgileCharacter::Tick(float DeltaSeconds)
 			FRotator CursorR = CursorFV.Rotation();
 			CursorToWorld->SetWorldLocation(TraceHitResult.Location);
 			CursorToWorld->SetWorldRotation(CursorR);
+		}
+	}*/
+
+	// Handle movement based on keyboard input
+	{
+		if (!CurrentVelocity.IsZero())
+		{
+			FVector OldLocation = GetActorLocation();
+			FVector NewLocation = GetActorLocation() + (CurrentVelocity * DeltaSeconds);
+			    
+			FVector UnitDirection = (NewLocation - OldLocation).SafeNormal();
+			float XMovement = 0;
+			float YMovement = UnitDirection.Y * 90;
+			if (UnitDirection.X < 0)
+			{
+				XMovement = 180;
+				YMovement *= -1;
+			}
+
+			FRotator NewRotation = FRotator(0, XMovement + YMovement, 0);
+				
+			//UNavigationSystem::SimpleMoveToLocation(PC, NewLocation);
+			SetActorLocation(NewLocation);
+			SetActorRotation(NewRotation);
 		}
 	}
 }

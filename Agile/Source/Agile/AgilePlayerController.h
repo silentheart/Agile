@@ -35,6 +35,10 @@ protected:
 	/** Navigate player to the given world location. */
 	void SetNewMoveDestination(const FVector DestLocation);
 
+	//Input functions
+	void MoveForward(float AxisValue);
+	void MoveRight(float AxisValue);
+
 	/** Input handlers for SetDestination action. */
 	void OnSetDestinationPressed();
 	void OnSetDestinationReleased();
