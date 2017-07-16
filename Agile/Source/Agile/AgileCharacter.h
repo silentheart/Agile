@@ -24,14 +24,12 @@ public:
 	/** Returns CursorToWorld subobject **/
 	FORCEINLINE class UDecalComponent* GetCursorToWorld() { return CursorToWorld; }
 	/** Returns CurrentVelocity vector **/
-	FORCEINLINE FVector GetCurrentVelocity() { return CurrentVelocity; }
-	/** Returns CurrentVelocity vector **/
-	FORCEINLINE void SetCurrentVelocity(const FVector& newVelocity) { CurrentVelocity = newVelocity; }
-	/** Returns CurrentVelocity vector **/
+	FORCEINLINE FVector GetCurrentVelocity() { return CurrentVelocity.GetSafeNormal() * MovementSpeed; }
+	/** Sets CurrentVelocity x value **/
 	FORCEINLINE void SetCurrentVelocityX(float x) { CurrentVelocity.X = x; }
-	/** Returns CurrentVelocity vector **/
+	/** Returns CurrentVelocity y value **/
 	FORCEINLINE void SetCurrentVelocityY(float y) { CurrentVelocity.Y = y; }
-
+	
 	UPROPERTY(EditAnywhere)
     float MovementSpeed = 250.0f;
 
@@ -47,6 +45,8 @@ private:
 	/** A decal that projects to the cursor location. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class UDecalComponent* CursorToWorld;
+
+	//void OnHit(class UPrimitiveComponent* HitComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
 
 	/* Movement variables */
 	FVector CurrentVelocity;

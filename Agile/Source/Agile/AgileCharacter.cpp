@@ -16,7 +16,7 @@ AAgileCharacter::AAgileCharacter()
 {
 	// Set size for player capsule
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
-
+	
 	// Don't rotate character to camera direction
 	bUseControllerRotationPitch = false;
 	bUseControllerRotationYaw = false;
@@ -61,7 +61,7 @@ void AAgileCharacter::Tick(float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
 
-	/*if (CursorToWorld != nullptr)
+	if (CursorToWorld != nullptr)
 	{
 		if (UHeadMountedDisplayFunctionLibrary::IsHeadMountedDisplayEnabled())
 		{
@@ -86,16 +86,17 @@ void AAgileCharacter::Tick(float DeltaSeconds)
 			CursorToWorld->SetWorldLocation(TraceHitResult.Location);
 			CursorToWorld->SetWorldRotation(CursorR);
 		}
-	}*/
+	}
 
 	// Handle movement based on keyboard input
 	{
 		if (!CurrentVelocity.IsZero())
 		{
 			FVector OldLocation = GetActorLocation();
-			FVector NewLocation = GetActorLocation() + (CurrentVelocity * DeltaSeconds);
-			    
-			FVector UnitDirection = (NewLocation - OldLocation).SafeNormal();
+			FVector NewLocation = GetActorLocation() + (GetCurrentVelocity() * DeltaSeconds);
+
+			// Calculate new rotation direction
+			FVector UnitDirection = (NewLocation - OldLocation).GetSafeNormal();
 			float XMovement = 0;
 			float YMovement = UnitDirection.Y * 90;
 			if (UnitDirection.X < 0)
@@ -104,10 +105,14 @@ void AAgileCharacter::Tick(float DeltaSeconds)
 				YMovement *= -1;
 			}
 
+			// Set each movement component individually, to enable sliding along surfaces
+			FVector NewXLocation(NewLocation.X, OldLocation.Y, OldLocation.Z);
+			SetActorLocation(NewXLocation, true);
+
+			FVector NewYLocation(GetActorLocation().X, NewLocation.Y, GetActorLocation().Z);
+			SetActorLocation(NewYLocation, true);
+
 			FRotator NewRotation = FRotator(0, XMovement + YMovement, 0);
-				
-			//UNavigationSystem::SimpleMoveToLocation(PC, NewLocation);
-			SetActorLocation(NewLocation);
 			SetActorRotation(NewRotation);
 		}
 	}

@@ -30,6 +30,7 @@ void AAgilePlayerController::SetupInputComponent()
 
 	InputComponent->BindAction("SetDestination", IE_Pressed, this, &AAgilePlayerController::OnSetDestinationPressed);
 	InputComponent->BindAction("SetDestination", IE_Released, this, &AAgilePlayerController::OnSetDestinationReleased);
+
 	InputComponent->BindAxis("MoveForward", this, &AAgilePlayerController::MoveForward);
 	InputComponent->BindAxis("MoveRight", this, &AAgilePlayerController::MoveRight);
 
@@ -106,7 +107,7 @@ void AAgilePlayerController::MoveForward(float AxisValue)
 	if (AAgileCharacter* MyPawn = Cast<AAgileCharacter>(GetPawn()))
 	{
 		// Move at 100 units per second forward or backward
-		MyPawn->SetCurrentVelocityX(FMath::Clamp(AxisValue, -1.0f, 1.0f) * MyPawn->MovementSpeed);
+		MyPawn->SetCurrentVelocityX(FMath::Clamp(AxisValue, -1.0f, 1.0f));
 	}
 }
 
@@ -115,7 +116,7 @@ void AAgilePlayerController::MoveRight(float AxisValue)
 	if (AAgileCharacter* MyPawn = Cast<AAgileCharacter>(GetPawn()))
 	{
 		// Move at 100 units per second forward or backward
-		MyPawn->SetCurrentVelocityY(FMath::Clamp(AxisValue, -1.0f, 1.0f) * MyPawn->MovementSpeed);
+		MyPawn->SetCurrentVelocityY(FMath::Clamp(AxisValue, -1.0f, 1.0f));
 	}
 }
 
