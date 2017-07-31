@@ -32,7 +32,7 @@ AAgileCharacter::AAgileCharacter()
 	CameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom"));
 	CameraBoom->SetupAttachment(RootComponent);
 	CameraBoom->bAbsoluteRotation = true; // Don't want arm to rotate when character does
-	CameraBoom->TargetArmLength = 800.f;
+	CameraBoom->TargetArmLength = 1000.f;
 	CameraBoom->RelativeRotation = FRotator(-60.f, 0.f, 0.f);
 	CameraBoom->bDoCollisionTest = false; // Don't want to pull camera in when it collides with level
 
@@ -55,6 +55,7 @@ AAgileCharacter::AAgileCharacter()
 	// Activate ticking in order to update the cursor every frame.
 	PrimaryActorTick.bCanEverTick = true;
 	PrimaryActorTick.bStartWithTickEnabled = true;
+	bCanMove = true;
 }
 
 void AAgileCharacter::Tick(float DeltaSeconds)
@@ -90,7 +91,7 @@ void AAgileCharacter::Tick(float DeltaSeconds)
 
 	// Handle movement based on keyboard input
 	{
-		if (!CurrentVelocity.IsZero())
+		if (!CurrentVelocity.IsZero() && bCanMove)
 		{
 			FVector OldLocation = GetActorLocation();
 			FVector NewLocation = GetActorLocation() + (GetCurrentVelocity() * DeltaSeconds);

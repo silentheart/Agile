@@ -29,9 +29,12 @@ public:
 	FORCEINLINE void SetCurrentVelocityX(float x) { CurrentVelocity.X = x; }
 	/** Returns CurrentVelocity y value **/
 	FORCEINLINE void SetCurrentVelocityY(float y) { CurrentVelocity.Y = y; }
+
+	FORCEINLINE bool GetCanMove() { return bCanMove; }
+	FORCEINLINE void SetCanMove(bool canMove) { bCanMove = canMove; }
 	
 	UPROPERTY(EditAnywhere)
-    float MovementSpeed = 250.0f;
+    float MovementSpeed = 500.0f;
 
 private:
 	/** Top down camera */
@@ -50,5 +53,11 @@ private:
 
 	/* Movement variables */
 	FVector CurrentVelocity;
+
+	/* Camera variables */
+	FRotator CameraOrientation;
+	float CameraDistance;
+
+	bool bCanMove;
 };
 
