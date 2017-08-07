@@ -1,6 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "Public/PlayerSeenByActorComponent.h"
+#include "PlayerSeenByActorComponent.h"
 #include "AgileCharacter.h"
 #include "SampleLady.h"
 
@@ -11,6 +11,8 @@ UPlayerSeenByActorComponent::UPlayerSeenByActorComponent()
 
 void UPlayerSeenByActorComponent::InitiateActorSeen(AActor* viewer)
 {
+	UE_LOG(LogTemp, Log, TEXT("UPlayerSeenByActorComponent::InitiateActorSeen"));
+
 	AAgileCharacter* player = Cast<AAgileCharacter>(GetParentActor());
 	ASampleLady* lady = Cast<ASampleLady>(viewer);
 	if (player != nullptr && lady != nullptr)

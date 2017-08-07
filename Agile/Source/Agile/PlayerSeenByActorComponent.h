@@ -6,10 +6,7 @@
 #include "SeenByActorComponent.h"
 #include "PlayerSeenByActorComponent.generated.h"
 
-/**
- * 
- */
-UCLASS(meta = (BlueprintSpawnableComponent))
+UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class AGILE_API UPlayerSeenByActorComponent : public USeenByActorComponent
 {
 	GENERATED_BODY()

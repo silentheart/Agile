@@ -35,5 +35,29 @@ void USeenByActorComponent::TickComponent(float DeltaTime, ELevelTick TickType, 
 
 AActor* USeenByActorComponent::GetParentActor()
 {
-	return GetOwner()->GetRootComponent()->GetAttachParent()->GetOwner();
+	auto Owner = GetOwner();
+	if (Owner == nullptr)
+	{
+		return nullptr;
+	}
+
+	/*auto OwnerRootComp = Owner->GetRootComponent();
+	if (OwnerRootComp == nullptr)
+	{
+		return nullptr;
+	}
+
+	auto AttachedParent = OwnerRootComp->GetAttachParent();
+	if (AttachedParent == nullptr)
+	{
+		return nullptr;
+	}
+
+	auto AttachedParentOwner = AttachedParent->GetOwner();
+	if (AttachedParentOwner == nullptr)
+	{
+		return nullptr;
+	}*/
+
+	return Owner;
 }

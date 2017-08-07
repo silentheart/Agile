@@ -1,6 +1,7 @@
 // Copyright 1998-2017 Epic Games, Inc. All Rights Reserved.
 
 #include "AgileCharacter.h"
+#include "PlayerSeenByActorComponent.h"
 #include "AI/Navigation/NavigationSystem.h"
 #include "UObject/ConstructorHelpers.h"
 #include "Camera/CameraComponent.h"
@@ -40,6 +41,10 @@ AAgileCharacter::AAgileCharacter()
 	TopDownCameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("TopDownCamera"));
 	TopDownCameraComponent->SetupAttachment(CameraBoom, USpringArmComponent::SocketName);
 	TopDownCameraComponent->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
+
+	// Attach components
+	UPlayerSeenByActorComponent* PlayerSeenByActorComp = CreateDefaultSubobject<UPlayerSeenByActorComponent>(TEXT("PlayerSeenByActorComponent"));
+	AddOwnedComponent(PlayerSeenByActorComp);
 
 	// Create a decal in the world to show the cursor's location
 	CursorToWorld = CreateDefaultSubobject<UDecalComponent>("CursorToWorld");

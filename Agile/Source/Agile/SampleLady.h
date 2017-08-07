@@ -28,5 +28,7 @@ public:
 
 	float GetStunTime() { return StunTime; };
 
-	
+private:
+	UFUNCTION()
+	void OnHit(class UPrimitiveComponent* HitComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
 };
