@@ -22,4 +22,5 @@ public:
 	
 private:
 	float StunTime;
+	bool bPlayerSeen;
 };

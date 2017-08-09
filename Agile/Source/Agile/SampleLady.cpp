@@ -16,8 +16,11 @@ ASampleLady::ASampleLady()
 	// Our root component will be a sphere that reacts to physics
 	USphereComponent* SphereComponent = CreateDefaultSubobject<USphereComponent>(TEXT("RootComponent"));
 	RootComponent = SphereComponent;
-	SphereComponent->InitSphereRadius(40.0f);
+	SphereComponent->InitSphereRadius(150.0f);
+	SphereComponent->bGenerateOverlapEvents = true;
 	SphereComponent->SetCollisionProfileName(TEXT("SampleLady"));
+
+	SetActorEnableCollision(true);
 
 	// Create and position a mesh component so we can see where our sphere is
 	UStaticMeshComponent* SampleLadyMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("VisualRepresentation"));
@@ -27,11 +30,11 @@ ASampleLady::ASampleLady()
 	{
 		SampleLadyMesh->SetStaticMesh(SampleLadyVisualAsset.Object);
 		SampleLadyMesh->SetRelativeLocation(FVector(0.0f, 0.0f, -40.0f));
-		//SampleLadyMesh->SetWorldScale3D(FVector(0.8f));
+		SampleLadyMesh->SetWorldScale3D(FVector(0.8f));
 	}
 
 	// Register for collisions
-	SphereComponent->OnComponentHit.AddDynamic(this, &ASampleLady::OnHit);
+	SphereComponent->OnComponentBeginOverlap.AddDynamic(this, &ASampleLady::OnBeginOverlap);
 }
 
 // Called when the game starts or when spawned
@@ -48,7 +51,7 @@ void ASampleLady::Tick(float DeltaTime)
 
 }
 
-void ASampleLady::OnHit(class UPrimitiveComponent* HitComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
+void ASampleLady::OnBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult)
 {
 	TArray<USeenByActorComponent*> SeenByActorComponents;
 

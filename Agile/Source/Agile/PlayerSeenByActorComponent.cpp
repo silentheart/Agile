@@ -7,6 +7,7 @@
 UPlayerSeenByActorComponent::UPlayerSeenByActorComponent()
 {
 	StunTime = 0;
+	bPlayerSeen = false;
 }
 
 void UPlayerSeenByActorComponent::InitiateActorSeen(AActor* viewer)
@@ -19,6 +20,7 @@ void UPlayerSeenByActorComponent::InitiateActorSeen(AActor* viewer)
 	{
 		StunTime = lady->GetStunTime();
 		player->SetCanMove(false);
+		bPlayerSeen = true;
 	}
 }
 
@@ -27,14 +29,18 @@ void UPlayerSeenByActorComponent::TickComponent(float DeltaTime, ELevelTick Tick
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	if (StunTime <= 0)
+	if (bPlayerSeen)
 	{
-		AAgileCharacter* player = Cast<AAgileCharacter>(GetParentActor());
-		if (player != nullptr)
+		if (StunTime == 0)
 		{
-			player->SetCanMove(true);
+			AAgileCharacter* player = Cast<AAgileCharacter>(GetParentActor());
+			if (player != nullptr)
+			{
+				player->SetCanMove(true);
+				bPlayerSeen = false;
+			}
 		}
+		else if(StunTime > 0)
+			StunTime--;
 	}
-	else
-		StunTime--;
 }

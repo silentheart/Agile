@@ -3,11 +3,11 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Character.h"
+#include "GameFramework/Pawn.h"
 #include "SampleLady.generated.h"
 
 UCLASS()
-class AGILE_API ASampleLady : public ACharacter
+class AGILE_API ASampleLady : public APawn
 {
 	GENERATED_BODY()
 
@@ -16,7 +16,7 @@ public:
 	ASampleLady();
 
 	UPROPERTY(EditAnywhere)
-	float StunTime = 10.0f * 1000;
+	float StunTime = 10.0f * 60;
 
 protected:
 	// Called when the game starts or when spawned
@@ -30,5 +30,5 @@ public:
 
 private:
 	UFUNCTION()
-	void OnHit(class UPrimitiveComponent* HitComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
+	void OnBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult);
 };
