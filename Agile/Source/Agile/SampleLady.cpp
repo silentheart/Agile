@@ -14,11 +14,21 @@ ASampleLady::ASampleLady()
 	PrimaryActorTick.bCanEverTick = true;
 
 	// Our root component will be a sphere that reacts to physics
-	USphereComponent* SphereComponent = CreateDefaultSubobject<USphereComponent>(TEXT("RootComponent"));
-	RootComponent = SphereComponent;
-	SphereComponent->InitSphereRadius(150.0f);
-	SphereComponent->bGenerateOverlapEvents = true;
-	SphereComponent->SetCollisionProfileName(TEXT("SampleLady"));
+	USphereComponent* SphereComponent1 = CreateDefaultSubobject<USphereComponent>(TEXT("SphereComponent1"));
+	//RootComponent = SphereComponent;
+	SphereComponent1->InitSphereRadius(100.0f);
+	SphereComponent1->bGenerateOverlapEvents = true;
+	SphereComponent1->SetCollisionProfileName(TEXT("SampleLady1"));
+
+	USphereComponent* SphereComponent2 = CreateDefaultSubobject<USphereComponent>(TEXT("SphereComponent2"));
+	SphereComponent2->InitSphereRadius(50.0f);
+	SphereComponent2->bGenerateOverlapEvents = true;
+	SphereComponent2->SetCollisionProfileName(TEXT("SampleLady2"));
+
+	USphereComponent* SphereComponent3 = CreateDefaultSubobject<USphereComponent>(TEXT("SphereComponent3"));
+	SphereComponent3->InitSphereRadius(25.0f);
+	SphereComponent3->bGenerateOverlapEvents = true;
+	SphereComponent3->SetCollisionProfileName(TEXT("SampleLady3"));
 
 	SetActorEnableCollision(true);
 
@@ -34,7 +44,9 @@ ASampleLady::ASampleLady()
 	}
 
 	// Register for collisions
-	SphereComponent->OnComponentBeginOverlap.AddDynamic(this, &ASampleLady::OnBeginOverlap);
+	SphereComponent1->OnComponentBeginOverlap.AddDynamic(this, &ASampleLady::OnBeginOverlap);
+	SphereComponent2->OnComponentBeginOverlap.AddDynamic(this, &ASampleLady::OnBeginOverlap);
+	SphereComponent3->OnComponentBeginOverlap.AddDynamic(this, &ASampleLady::OnBeginOverlap);
 }
 
 // Called when the game starts or when spawned
