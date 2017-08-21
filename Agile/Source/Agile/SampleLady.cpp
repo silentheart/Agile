@@ -13,25 +13,6 @@ ASampleLady::ASampleLady()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	// Our root component will be a sphere that reacts to physics
-	USphereComponent* SphereComponent1 = CreateDefaultSubobject<USphereComponent>(TEXT("SphereComponent1"));
-	//RootComponent = SphereComponent;
-	SphereComponent1->InitSphereRadius(100.0f);
-	SphereComponent1->bGenerateOverlapEvents = true;
-	SphereComponent1->SetCollisionProfileName(TEXT("SampleLady1"));
-
-	USphereComponent* SphereComponent2 = CreateDefaultSubobject<USphereComponent>(TEXT("SphereComponent2"));
-	SphereComponent2->InitSphereRadius(50.0f);
-	SphereComponent2->bGenerateOverlapEvents = true;
-	SphereComponent2->SetCollisionProfileName(TEXT("SampleLady2"));
-
-	USphereComponent* SphereComponent3 = CreateDefaultSubobject<USphereComponent>(TEXT("SphereComponent3"));
-	SphereComponent3->InitSphereRadius(25.0f);
-	SphereComponent3->bGenerateOverlapEvents = true;
-	SphereComponent3->SetCollisionProfileName(TEXT("SampleLady3"));
-
-	SetActorEnableCollision(true);
-
 	// Create and position a mesh component so we can see where our sphere is
 	UStaticMeshComponent* SampleLadyMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("VisualRepresentation"));
 	SampleLadyMesh->SetupAttachment(RootComponent);
@@ -39,9 +20,33 @@ ASampleLady::ASampleLady()
 	if (SampleLadyVisualAsset.Succeeded())
 	{
 		SampleLadyMesh->SetStaticMesh(SampleLadyVisualAsset.Object);
-		SampleLadyMesh->SetRelativeLocation(FVector(0.0f, 0.0f, -40.0f));
-		SampleLadyMesh->SetWorldScale3D(FVector(0.8f));
+		SampleLadyMesh->SetRelativeLocation(FVector(0.0f, 0.0f, 0.0f));
 	}
+	RootComponent = SampleLadyMesh;
+
+	// Our root component will be a sphere that reacts to physics
+	USphereComponent* SphereComponent1 = CreateDefaultSubobject<USphereComponent>(TEXT("SphereComponent1"));
+	SphereComponent1->AttachToComponent(RootComponent, FAttachmentTransformRules(EAttachmentRule::KeepRelative, false));
+	SphereComponent1->InitSphereRadius(50.0f);
+	SphereComponent1->bGenerateOverlapEvents = true;
+	SphereComponent1->SetCollisionProfileName(TEXT("SampleLady1"));
+	SphereComponent1->SetRelativeLocation(RootComponent->GetForwardVector() * 150);
+	
+	USphereComponent* SphereComponent2 = CreateDefaultSubobject<USphereComponent>(TEXT("SphereComponent2"));
+	SphereComponent2->AttachToComponent(RootComponent, FAttachmentTransformRules(EAttachmentRule::KeepRelative, false));
+	SphereComponent2->InitSphereRadius(25.0f);
+	SphereComponent2->bGenerateOverlapEvents = true;
+	SphereComponent2->SetCollisionProfileName(TEXT("SampleLady2"));
+	SphereComponent2->SetRelativeLocation(RootComponent->GetForwardVector() * 75);
+
+	USphereComponent* SphereComponent3 = CreateDefaultSubobject<USphereComponent>(TEXT("SphereComponent3"));
+	SphereComponent3->AttachToComponent(RootComponent, FAttachmentTransformRules(EAttachmentRule::KeepRelative, false));
+	SphereComponent3->InitSphereRadius(12.5f);
+	SphereComponent3->bGenerateOverlapEvents = true;
+	SphereComponent3->SetCollisionProfileName(TEXT("SampleLady3"));
+	SphereComponent3->SetRelativeLocation(RootComponent->GetForwardVector() * 100);
+
+	SetActorEnableCollision(true);
 
 	// Register for collisions
 	SphereComponent1->OnComponentBeginOverlap.AddDynamic(this, &ASampleLady::OnBeginOverlap);

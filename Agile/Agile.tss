@@ -24,13 +24,11 @@
       <string>D:\Github\Agile\Agile\Source\Agile\SeenByActorComponent.h</string>
     </ArrayOfString>
     <ArrayOfString>
-      <string>D:\Github\Agile\Agile\Source\Agile\Public\PlayerSeenByActorComponent.h</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>D:\Github\Agile\Agile\Source\Agile\Private\PlayerSeenByActorComponent.cpp</string>
-    </ArrayOfString>
-    <ArrayOfString>
       <string>D:\Github\Agile\Agile\Source\Agile\AgileGameMode.cpp</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>D:\Github\Agile\Agile\Source\Agile\PlayerSeenByActorComponent.cpp</string>
+      <string>D:\Github\Agile\Agile\Source\Agile\PlayerSeenByActorComponent.h</string>
     </ArrayOfString>
   </ArrayOfArrayOfString>
 </ArrayOfArrayOfArrayOfString>

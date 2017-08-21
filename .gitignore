@@ -112,3 +112,4 @@ $RECYCLE.BIN/
 *.log
 Agile/Intermediate/Build/Win64/UE4Editor/Inc/Agile/Agile.generated.cpp
 *.log
+Agile/Saved/Config/Windows/EditorPerProjectUserSettings.ini
