@@ -30,5 +30,13 @@
       <string>D:\Github\Agile\Agile\Source\Agile\PlayerSeenByActorComponent.cpp</string>
       <string>D:\Github\Agile\Agile\Source\Agile\PlayerSeenByActorComponent.h</string>
     </ArrayOfString>
+    <ArrayOfString>
+      <string>D:\Github\Agile\Agile\Source\Agile\PickupableItem.cpp</string>
+      <string>D:\Github\Agile\Agile\Source\Agile\PickupableItem.h</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>D:\Github\Agile\Agile\Source\Agile\InteractionComponent.cpp</string>
+      <string>D:\Github\Agile\Agile\Source\Agile\InteractionComponent.h</string>
+    </ArrayOfString>
   </ArrayOfArrayOfString>
 </ArrayOfArrayOfArrayOfString>

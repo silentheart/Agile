@@ -24,7 +24,7 @@ ASampleLady::ASampleLady()
 	}
 	RootComponent = SampleLadyMesh;
 
-	// Our root component will be a sphere that reacts to physics
+	// Create sphere components to make a cone of sight
 	USphereComponent* SphereComponent1 = CreateDefaultSubobject<USphereComponent>(TEXT("SphereComponent1"));
 	SphereComponent1->AttachToComponent(RootComponent, FAttachmentTransformRules(EAttachmentRule::KeepRelative, false));
 	SphereComponent1->InitSphereRadius(50.0f);
@@ -37,21 +37,21 @@ ASampleLady::ASampleLady()
 	SphereComponent2->InitSphereRadius(25.0f);
 	SphereComponent2->bGenerateOverlapEvents = true;
 	SphereComponent2->SetCollisionProfileName(TEXT("SampleLady2"));
-	SphereComponent2->SetRelativeLocation(RootComponent->GetForwardVector() * 75);
+	SphereComponent2->SetRelativeLocation(RootComponent->GetForwardVector() * 100);
 
-	USphereComponent* SphereComponent3 = CreateDefaultSubobject<USphereComponent>(TEXT("SphereComponent3"));
+	/*USphereComponent* SphereComponent3 = CreateDefaultSubobject<USphereComponent>(TEXT("SphereComponent3"));
 	SphereComponent3->AttachToComponent(RootComponent, FAttachmentTransformRules(EAttachmentRule::KeepRelative, false));
 	SphereComponent3->InitSphereRadius(12.5f);
 	SphereComponent3->bGenerateOverlapEvents = true;
 	SphereComponent3->SetCollisionProfileName(TEXT("SampleLady3"));
-	SphereComponent3->SetRelativeLocation(RootComponent->GetForwardVector() * 100);
+	SphereComponent3->SetRelativeLocation(RootComponent->GetForwardVector() * 75);*/
 
 	SetActorEnableCollision(true);
 
 	// Register for collisions
 	SphereComponent1->OnComponentBeginOverlap.AddDynamic(this, &ASampleLady::OnBeginOverlap);
 	SphereComponent2->OnComponentBeginOverlap.AddDynamic(this, &ASampleLady::OnBeginOverlap);
-	SphereComponent3->OnComponentBeginOverlap.AddDynamic(this, &ASampleLady::OnBeginOverlap);
+	//SphereComponent3->OnComponentBeginOverlap.AddDynamic(this, &ASampleLady::OnBeginOverlap);
 }
 
 // Called when the game starts or when spawned

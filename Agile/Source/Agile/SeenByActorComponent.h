@@ -6,7 +6,6 @@
 #include "Components/ActorComponent.h"
 #include "SeenByActorComponent.generated.h"
 
-
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class AGILE_API USeenByActorComponent : public UActorComponent
 {

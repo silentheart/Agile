@@ -2,6 +2,7 @@
 
 #include "AgileCharacter.h"
 #include "PlayerSeenByActorComponent.h"
+#include "InteractionComponent.h"
 #include "AI/Navigation/NavigationSystem.h"
 #include "UObject/ConstructorHelpers.h"
 #include "Camera/CameraComponent.h"
@@ -10,6 +11,7 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/PlayerController.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "Runtime/Engine/Classes/Components/SphereComponent.h"
 #include "Kismet/HeadMountedDisplayFunctionLibrary.h"
 #include "Materials/Material.h"
 
@@ -43,12 +45,22 @@ AAgileCharacter::AAgileCharacter()
 	TopDownCameraComponent->SetupAttachment(CameraBoom, USpringArmComponent::SocketName);
 	TopDownCameraComponent->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
 
+	// Create collision sphere for interacting with objects
+	USphereComponent* ObjectCollisionSphere = CreateDefaultSubobject<USphereComponent>(TEXT("ObjectCollisionSphere"));
+	ObjectCollisionSphere->AttachToComponent(RootComponent, FAttachmentTransformRules(EAttachmentRule::KeepRelative, false));
+	ObjectCollisionSphere->InitSphereRadius(60.0f);
+	ObjectCollisionSphere->bGenerateOverlapEvents = true;
+	ObjectCollisionSphere->SetCollisionProfileName(TEXT("ObjectCollisionSphere"));
+
 	// Attach components
 	UPlayerSeenByActorComponent* PlayerSeenByActorComp = CreateDefaultSubobject<UPlayerSeenByActorComponent>(TEXT("PlayerSeenByActorComponent"));
 	AddOwnedComponent(PlayerSeenByActorComp);
 
+	// Register for collisions
+	ObjectCollisionSphere->OnComponentBeginOverlap.AddDynamic(this, &AAgileCharacter::OnBeginOverlap);
+
 	// Create a decal in the world to show the cursor's location
-	CursorToWorld = CreateDefaultSubobject<UDecalComponent>("CursorToWorld");
+	/*CursorToWorld = CreateDefaultSubobject<UDecalComponent>("CursorToWorld");
 	CursorToWorld->SetupAttachment(RootComponent);
 	static ConstructorHelpers::FObjectFinder<UMaterial> DecalMaterialAsset(TEXT("Material'/Game/TopDownCPP/Blueprints/M_Cursor_Decal.M_Cursor_Decal'"));
 	if (DecalMaterialAsset.Succeeded())
@@ -56,7 +68,7 @@ AAgileCharacter::AAgileCharacter()
 		CursorToWorld->SetDecalMaterial(DecalMaterialAsset.Object);
 	}
 	CursorToWorld->DecalSize = FVector(16.0f, 32.0f, 32.0f);
-	CursorToWorld->SetRelativeRotation(FRotator(90.0f, 0.0f, 0.0f).Quaternion());
+	CursorToWorld->SetRelativeRotation(FRotator(90.0f, 0.0f, 0.0f).Quaternion());*/
 
 	// Activate ticking in order to update the cursor every frame.
 	PrimaryActorTick.bCanEverTick = true;
@@ -122,5 +134,18 @@ void AAgileCharacter::Tick(float DeltaSeconds)
 			FRotator NewRotation = FRotator(0, XMovement + YMovement, 0);
 			SetActorRotation(NewRotation);
 		}
+	}
+}
+
+void AAgileCharacter::OnBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult)
+{
+	TArray<UInteractionComponent*> InteractionComponents;
+
+	OtherActor->GetComponents(InteractionComponents);
+
+	if (InteractionComponents.Num() > 0)
+	{
+		UInteractionComponent* InteractionComp = InteractionComponents[0];
+		InteractionComp->Activate(this);
 	}
 }
