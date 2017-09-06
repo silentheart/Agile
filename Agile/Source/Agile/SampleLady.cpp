@@ -39,19 +39,11 @@ ASampleLady::ASampleLady()
 	SphereComponent2->SetCollisionProfileName(TEXT("SampleLady2"));
 	SphereComponent2->SetRelativeLocation(RootComponent->GetForwardVector() * 100);
 
-	/*USphereComponent* SphereComponent3 = CreateDefaultSubobject<USphereComponent>(TEXT("SphereComponent3"));
-	SphereComponent3->AttachToComponent(RootComponent, FAttachmentTransformRules(EAttachmentRule::KeepRelative, false));
-	SphereComponent3->InitSphereRadius(12.5f);
-	SphereComponent3->bGenerateOverlapEvents = true;
-	SphereComponent3->SetCollisionProfileName(TEXT("SampleLady3"));
-	SphereComponent3->SetRelativeLocation(RootComponent->GetForwardVector() * 75);*/
-
 	SetActorEnableCollision(true);
 
 	// Register for collisions
 	SphereComponent1->OnComponentBeginOverlap.AddDynamic(this, &ASampleLady::OnBeginOverlap);
 	SphereComponent2->OnComponentBeginOverlap.AddDynamic(this, &ASampleLady::OnBeginOverlap);
-	//SphereComponent3->OnComponentBeginOverlap.AddDynamic(this, &ASampleLady::OnBeginOverlap);
 }
 
 // Called when the game starts or when spawned

@@ -10,33 +10,7 @@
       <string>D:\Github\Agile\Agile\Source\Agile\AgilePlayerController.h</string>
     </ArrayOfString>
     <ArrayOfString>
-      <string>C:\Program Files\Epic Games\UE_4.16\Engine\Source\Runtime\Engine\Private\AI\Navigation\NavigationSystem.cpp</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>C:\Program Files\Epic Games\UE_4.16\Engine\Source\Runtime\Core\Public\Math\Vector.h</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>D:\Github\Agile\Agile\Source\Agile\SampleLady.cpp</string>
-      <string>D:\Github\Agile\Agile\Source\Agile\SampleLady.h</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>D:\Github\Agile\Agile\Source\Agile\SeenByActorComponent.cpp</string>
-      <string>D:\Github\Agile\Agile\Source\Agile\SeenByActorComponent.h</string>
-    </ArrayOfString>
-    <ArrayOfString>
       <string>D:\Github\Agile\Agile\Source\Agile\AgileGameMode.cpp</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>D:\Github\Agile\Agile\Source\Agile\PlayerSeenByActorComponent.cpp</string>
-      <string>D:\Github\Agile\Agile\Source\Agile\PlayerSeenByActorComponent.h</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>D:\Github\Agile\Agile\Source\Agile\PickupableItem.cpp</string>
-      <string>D:\Github\Agile\Agile\Source\Agile\PickupableItem.h</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>D:\Github\Agile\Agile\Source\Agile\InteractionComponent.cpp</string>
-      <string>D:\Github\Agile\Agile\Source\Agile\InteractionComponent.h</string>
     </ArrayOfString>
   </ArrayOfArrayOfString>
 </ArrayOfArrayOfArrayOfString>
