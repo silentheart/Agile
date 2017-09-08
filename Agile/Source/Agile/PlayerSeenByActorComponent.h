@@ -22,5 +22,6 @@ public:
 	
 private:
 	float StunTime;
+	float StunCooldown;
 	bool bPlayerSeen;
 };

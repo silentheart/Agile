@@ -3,11 +3,11 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Pawn.h"
+#include "GameFramework/Character.h"
 #include "SampleLady.generated.h"
 
 UCLASS()
-class AGILE_API ASampleLady : public APawn
+class AGILE_API ASampleLady : public ACharacter
 {
 	GENERATED_BODY()
 

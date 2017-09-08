@@ -7,6 +7,7 @@
 UPlayerSeenByActorComponent::UPlayerSeenByActorComponent()
 {
 	StunTime = 0;
+	StunCooldown = 0;
 	bPlayerSeen = false;
 }
 
@@ -29,7 +30,7 @@ void UPlayerSeenByActorComponent::TickComponent(float DeltaTime, ELevelTick Tick
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	if (bPlayerSeen)
+	if (bPlayerSeen && StunCooldown == 0)
 	{
 		if (StunTime == 0)
 		{
@@ -38,9 +39,16 @@ void UPlayerSeenByActorComponent::TickComponent(float DeltaTime, ELevelTick Tick
 			{
 				player->SetCanMove(true);
 				bPlayerSeen = false;
+				StunCooldown = 90;
 			}
 		}
-		else if(StunTime > 0)
-			StunTime--;
+		else if (StunTime > 0)
+		{
+			--StunTime;
+		}
+	}
+	else if (StunCooldown > 0)
+	{
+		--StunCooldown;
 	}
 }
