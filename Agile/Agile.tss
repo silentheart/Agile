@@ -10,15 +10,16 @@
       <string>D:\Github\Agile\Agile\Source\Agile\AgilePlayerController.h</string>
     </ArrayOfString>
     <ArrayOfString>
-      <string>D:\Github\Agile\Agile\Source\Agile.Target.cs</string>
-    </ArrayOfString>
-    <ArrayOfString>
       <string>D:\Github\Agile\Agile\Source\Agile\SampleLady.cpp</string>
       <string>D:\Github\Agile\Agile\Source\Agile\SampleLady.h</string>
     </ArrayOfString>
     <ArrayOfString>
       <string>D:\Github\Agile\Agile\Source\Agile\CreditCardLady.cpp</string>
       <string>D:\Github\Agile\Agile\Source\Agile\CreditCardLady.h</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>D:\Github\Agile\Agile\Source\Agile\PlayerSeenByActorComponent.cpp</string>
+      <string>D:\Github\Agile\Agile\Source\Agile\PlayerSeenByActorComponent.h</string>
     </ArrayOfString>
   </ArrayOfArrayOfString>
 </ArrayOfArrayOfArrayOfString>

@@ -10,9 +10,14 @@
 // Sets default values
 ACreditCardLady::ACreditCardLady() : Super()
 {
-	/*GetCharacterMovement()->bOrientRotationToMovement = true;
-	GetCharacterMovement()->RotationRate = FRotator(0.0f, 20.0f, 20.0f);
-	bUseControllerRotationYaw = false;*/
+	CurrentTargetIndex = 0;
+}
+
+// Called when the game starts or when spawned
+void ACreditCardLady::BeginPlay()
+{
+	Super::BeginPlay();
+
 }
 
 // Called every frame
@@ -20,21 +25,22 @@ void ACreditCardLady::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	
-	auto world = GetWorld();
-	if (world == nullptr) return;
+	MoveToTargetNode(DeltaTime);
+}
 
-	auto playerController = world->GetFirstPlayerController();
-	if (playerController == nullptr) return;
+void ACreditCardLady::MoveToTargetNode(float DeltaTime)
+{
+	if (MovementTargets.Num() < 1)
+	{
+		return;
+	}
 
-	auto playerPawn = playerController->GetPawn();
-	if (playerPawn == nullptr) return;
+	auto targetLocation = MovementTargets[CurrentTargetIndex]->GetActorLocation();
 
-	auto playerLocation = playerPawn->GetActorLocation();
-	
 	// Move towards player
 	FVector OldLocation = GetActorLocation();
-	auto distToPlayer = (playerLocation - GetActorLocation()).GetSafeNormal();
-	FVector NewLocation = GetActorLocation() + (distToPlayer * MovementSpeed * DeltaTime);
+	auto distToTarget = (targetLocation - GetActorLocation()).GetSafeNormal();
+	FVector NewLocation = GetActorLocation() + (distToTarget * MovementSpeed * DeltaTime);
 
 	// Set each movement component individually, to enable sliding along surfaces
 	FVector NewXLocation(NewLocation.X, OldLocation.Y, OldLocation.Z);
@@ -44,7 +50,7 @@ void ACreditCardLady::Tick(float DeltaTime)
 	SetActorLocation(NewYLocation, true);
 
 	auto dirVec = GetActorRotation().Vector();
-	auto dotProd = FVector::DotProduct(dirVec, distToPlayer);
+	auto dotProd = FVector::DotProduct(dirVec, distToTarget);
 
 	int angleSign = 1;
 	if (dotProd < 0)
@@ -54,6 +60,12 @@ void ACreditCardLady::Tick(float DeltaTime)
 
 	FRotator NewRotation = FRotator(0, GetActorRotation().Yaw + acos(dotProd) * angleSign, 0);
 	SetActorRotation(NewRotation);
-}
 
+	auto dist = FVector::DistXY(GetActorLocation(), targetLocation);
+
+	if (dist < .01f)
+	{
+		CurrentTargetIndex = (CurrentTargetIndex + 1) % MovementTargets.Num();
+	}
+}
 
