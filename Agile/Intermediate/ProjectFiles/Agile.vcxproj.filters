@@ -1,64 +1,115 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-	<ItemGroup>
-		<None Include="..\..\Agile.uproject" />
-		<Filter Include="Source">
-			<UniqueIdentifier>{19328748-A6DE-4733-8EEE-22BA26F77C83}</UniqueIdentifier>
-		</Filter>
-		<None Include="..\..\Source\Agile.Target.cs">
-			<Filter>Source</Filter>
-		</None >
-		<None Include="..\..\Source\AgileEditor.Target.cs">
-			<Filter>Source</Filter>
-		</None >
-		<Filter Include="Config">
-			<UniqueIdentifier>{0DCD0CA1-5350-410F-A0F5-0B007DFEEC08}</UniqueIdentifier>
-		</Filter>
-		<None Include="..\..\Config\DefaultEditor.ini">
-			<Filter>Config</Filter>
-		</None >
-		<None Include="..\..\Config\DefaultEditorPerProjectUserSettings.ini">
-			<Filter>Config</Filter>
-		</None >
-		<None Include="..\..\Config\DefaultEngine.ini">
-			<Filter>Config</Filter>
-		</None >
-		<None Include="..\..\Config\DefaultGame.ini">
-			<Filter>Config</Filter>
-		</None >
-		<None Include="..\..\Config\DefaultInput.ini">
-			<Filter>Config</Filter>
-		</None >
-		<Filter Include="Source\Agile">
-			<UniqueIdentifier>{43483F12-609E-4C91-A3A6-E6D76D6F422B}</UniqueIdentifier>
-		</Filter>
-		<None Include="..\..\Source\Agile\Agile.Build.cs">
-			<Filter>Source\Agile</Filter>
-		</None >
-		<ClCompile Include="..\..\Source\Agile\Agile.cpp">
-			<Filter>Source\Agile</Filter>
-		</ClCompile >
-		<ClInclude Include="..\..\Source\Agile\Agile.h">
-			<Filter>Source\Agile</Filter>
-		</ClInclude >
-		<ClCompile Include="..\..\Source\Agile\AgileCharacter.cpp">
-			<Filter>Source\Agile</Filter>
-		</ClCompile >
-		<ClInclude Include="..\..\Source\Agile\AgileCharacter.h">
-			<Filter>Source\Agile</Filter>
-		</ClInclude >
-		<ClCompile Include="..\..\Source\Agile\AgileGameMode.cpp">
-			<Filter>Source\Agile</Filter>
-		</ClCompile >
-		<ClInclude Include="..\..\Source\Agile\AgileGameMode.h">
-			<Filter>Source\Agile</Filter>
-		</ClInclude >
-		<ClCompile Include="..\..\Source\Agile\AgilePlayerController.cpp">
-			<Filter>Source\Agile</Filter>
-		</ClCompile >
-		<ClInclude Include="..\..\Source\Agile\AgilePlayerController.h">
-			<Filter>Source\Agile</Filter>
-		</ClInclude >
-	</ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Agile.uproject" />
+    <Filter Include="Source">
+      <UniqueIdentifier>{19328748-A6DE-4733-8EEE-22BA26F77C83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Config">
+      <UniqueIdentifier>{0DCD0CA1-5350-410F-A0F5-0B007DFEEC08}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Config\DefaultEditor.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEditorPerProjectUserSettings.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEngine.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultGame.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultInput.ini">
+      <Filter>Config</Filter>
+    </None>
+    <Filter Include="Source\Agile">
+      <UniqueIdentifier>{43483F12-609E-4C91-A3A6-E6D76D6F422B}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\Agile\Agile.Build.cs">
+      <Filter>Source\Agile</Filter>
+    </None>
+    <ClCompile Include="..\..\Source\Agile\Agile.cpp">
+      <Filter>Source\Agile</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\Agile\Agile.h">
+      <Filter>Source\Agile</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\Agile\AgileCharacter.cpp">
+      <Filter>Source\Agile</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\Agile\AgileCharacter.h">
+      <Filter>Source\Agile</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\Agile\AgileGameMode.cpp">
+      <Filter>Source\Agile</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\Agile\AgileGameMode.h">
+      <Filter>Source\Agile</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\Agile\AgilePlayerController.cpp">
+      <Filter>Source\Agile</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\Agile\AgilePlayerController.h">
+      <Filter>Source\Agile</Filter>
+    </ClInclude>
+    <None Include="..\..\Source\Agile.Target.cs">
+      <Filter>Source\Agile</Filter>
+    </None>
+    <None Include="..\..\Source\AgileEditor.Target.cs">
+      <Filter>Source\Agile</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Source\Agile\InteractionComponent.cpp">
+      <Filter>Source\Agile</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Agile\PickupableItem.cpp">
+      <Filter>Source\Agile</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Agile\PickupComponent.cpp">
+      <Filter>Source\Agile</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Agile\PlayerSeenByActorComponent.cpp">
+      <Filter>Source\Agile</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Agile\SampleLady.cpp">
+      <Filter>Source\Agile</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Agile\SeenByActorComponent.cpp">
+      <Filter>Source\Agile</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Agile\CreditCardLady.cpp">
+      <Filter>Source\Agile</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Agile\TargetNode.cpp">
+      <Filter>Source\Agile</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Source\Agile\InteractionComponent.h">
+      <Filter>Source\Agile</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Agile\PickupableItem.h">
+      <Filter>Source\Agile</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Agile\PickupComponent.h">
+      <Filter>Source\Agile</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Agile\PlayerSeenByActorComponent.h">
+      <Filter>Source\Agile</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Agile\SampleLady.h">
+      <Filter>Source\Agile</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Agile\SeenByActorComponent.h">
+      <Filter>Source\Agile</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Agile\CreditCardLady.h">
+      <Filter>Source\Agile</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Agile\TargetNode.h">
+      <Filter>Source\Agile</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>

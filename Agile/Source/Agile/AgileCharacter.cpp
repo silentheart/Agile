@@ -11,7 +11,6 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/PlayerController.h"
 #include "GameFramework/SpringArmComponent.h"
-#include "Runtime/Engine/Classes/Components/SphereComponent.h"
 #include "Kismet/HeadMountedDisplayFunctionLibrary.h"
 #include "Materials/Material.h"
 
@@ -46,7 +45,7 @@ AAgileCharacter::AAgileCharacter()
 	TopDownCameraComponent->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
 
 	// Create collision sphere for interacting with objects
-	USphereComponent* ObjectCollisionSphere = CreateDefaultSubobject<USphereComponent>(TEXT("ObjectCollisionSphere"));
+	ObjectCollisionSphere = CreateDefaultSubobject<USphereComponent>(TEXT("ObjectCollisionSphere"));
 	ObjectCollisionSphere->AttachToComponent(RootComponent, FAttachmentTransformRules(EAttachmentRule::KeepRelative, false));
 	ObjectCollisionSphere->InitSphereRadius(60.0f);
 	ObjectCollisionSphere->bGenerateOverlapEvents = true;
@@ -108,38 +107,36 @@ void AAgileCharacter::Tick(float DeltaSeconds)
 	}
 
 	// Handle movement based on keyboard input
+	if (!CurrentVelocity.IsZero() && bCanMove)
 	{
-		if (!CurrentVelocity.IsZero() && bCanMove)
+		FVector OldLocation = GetActorLocation();
+		FVector NewLocation = GetActorLocation() + (GetCurrentVelocity() * DeltaSeconds);
+
+		// Calculate new rotation direction
+		FVector UnitDirection = (NewLocation - OldLocation).GetSafeNormal();
+		float XMovement = 0;
+		float YMovement = UnitDirection.Y * 90;
+		if (UnitDirection.X < 0)
 		{
-			FVector OldLocation = GetActorLocation();
-			FVector NewLocation = GetActorLocation() + (GetCurrentVelocity() * DeltaSeconds);
-
-			// Calculate new rotation direction
-			FVector UnitDirection = (NewLocation - OldLocation).GetSafeNormal();
-			float XMovement = 0;
-			float YMovement = UnitDirection.Y * 90;
-			if (UnitDirection.X < 0)
-			{
-				XMovement = 180;
-				YMovement *= -1;
-			}
-
-			// Set each movement component individually, to enable sliding along surfaces
-			FVector NewXLocation(NewLocation.X, OldLocation.Y, OldLocation.Z);
-			SetActorLocation(NewXLocation, true);
-
-			FVector NewYLocation(GetActorLocation().X, NewLocation.Y, GetActorLocation().Z);
-			SetActorLocation(NewYLocation, true);
-
-			FRotator NewRotation = FRotator(0, XMovement + YMovement, 0);
-			SetActorRotation(NewRotation);
+			XMovement = 180;
+			YMovement *= -1;
 		}
-	}
+
+		// Set each movement component individually, to enable sliding along surfaces
+		FVector NewXLocation(NewLocation.X, OldLocation.Y, OldLocation.Z);
+		SetActorLocation(NewXLocation, true);
+
+		FVector NewYLocation(GetActorLocation().X, NewLocation.Y, GetActorLocation().Z);
+		SetActorLocation(NewYLocation, true);
+
+		FRotator NewRotation = FRotator(0, XMovement + YMovement, 0);
+		SetActorRotation(NewRotation);
+	}	
 }
 
 void AAgileCharacter::OnBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult)
 {
-	TArray<UInteractionComponent*> InteractionComponents;
+	/*TArray<UInteractionComponent*> InteractionComponents;
 
 	OtherActor->GetComponents(InteractionComponents);
 
@@ -147,5 +144,24 @@ void AAgileCharacter::OnBeginOverlap(UPrimitiveComponent* OverlappedComponent, A
 	{
 		UInteractionComponent* InteractionComp = InteractionComponents[0];
 		InteractionComp->Activate(this);
+	}*/
+}
+
+void AAgileCharacter::PerformInteract()
+{
+	TSet<AActor*> overLappingActors;
+    ObjectCollisionSphere->GetOverlappingActors(overLappingActors);
+
+	for (auto actor : overLappingActors)
+	{
+		TArray<UInteractionComponent*> InteractionComponents;
+
+		actor->GetComponents(InteractionComponents);
+
+		if (InteractionComponents.Num() > 0)
+		{
+			UInteractionComponent* InteractionComp = InteractionComponents[0];
+			InteractionComp->Activate(this);
+		}
 	}
 }

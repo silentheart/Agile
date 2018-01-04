@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "Runtime/Engine/Classes/Components/SphereComponent.h"
 #include "AgileCharacter.generated.h"
 
 UCLASS(Blueprintable)
@@ -29,6 +30,8 @@ public:
 	FORCEINLINE void SetCurrentVelocityX(float x) { CurrentVelocity.X = x; }
 	/** Returns CurrentVelocity y value **/
 	FORCEINLINE void SetCurrentVelocityY(float y) { CurrentVelocity.Y = y; }
+
+	void PerformInteract();
 
 	FORCEINLINE bool GetCanMove() { return bCanMove; }
 	FORCEINLINE void SetCanMove(bool canMove) { bCanMove = canMove; }
@@ -60,5 +63,7 @@ private:
 	float CameraDistance;
 
 	bool bCanMove;
+
+	USphereComponent* ObjectCollisionSphere;
 };
 

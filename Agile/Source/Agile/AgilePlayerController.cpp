@@ -39,6 +39,7 @@ void AAgilePlayerController::SetupInputComponent()
 	InputComponent->BindTouch(EInputEvent::IE_Repeat, this, &AAgilePlayerController::MoveToTouchLocation);
 
 	InputComponent->BindAction("ResetVR", IE_Pressed, this, &AAgilePlayerController::OnResetVR);
+	InputComponent->BindAction("Interact", IE_Pressed, this, &AAgilePlayerController::Interact);
 }
 
 void AAgilePlayerController::OnResetVR()
@@ -117,6 +118,14 @@ void AAgilePlayerController::MoveRight(float AxisValue)
 	{
 		// Move at 100 units per second forward or backward
 		MyPawn->SetCurrentVelocityY(FMath::Clamp(AxisValue, -1.0f, 1.0f));
+	}
+}
+
+void AAgilePlayerController::Interact()
+{
+	if (AAgileCharacter* MyPawn = Cast<AAgileCharacter>(GetPawn()))
+	{
+		MyPawn->PerformInteract();
 	}
 }
 

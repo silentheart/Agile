@@ -37,7 +37,7 @@ void ACreditCardLady::MoveToTargetNode(float DeltaTime)
 
 	auto targetLocation = MovementTargets[CurrentTargetIndex]->GetActorLocation();
 
-	// Move towards player
+	// Move towards target
 	FVector OldLocation = GetActorLocation();
 	auto distToTarget = (targetLocation - GetActorLocation()).GetSafeNormal();
 	FVector NewLocation = GetActorLocation() + (distToTarget * MovementSpeed * DeltaTime);
@@ -49,22 +49,15 @@ void ACreditCardLady::MoveToTargetNode(float DeltaTime)
 	FVector NewYLocation(GetActorLocation().X, NewLocation.Y, GetActorLocation().Z);
 	SetActorLocation(NewYLocation, true);
 
-	auto dirVec = GetActorRotation().Vector();
-	auto dotProd = FVector::DotProduct(dirVec, distToTarget);
-
-	int angleSign = 1;
-	if (dotProd < 0)
-	{
-		angleSign = -1;
-	}
-
-	FRotator NewRotation = FRotator(0, GetActorRotation().Yaw + acos(dotProd) * angleSign, 0);
-	SetActorRotation(NewRotation);
+    // Rotate the actor to look at target. Need to move to object space to get an accurate angle
+    auto theta = atan2(distToTarget.Y, distToTarget.X);
+	SetActorRotation(FRotator(0, FMath::RadiansToDegrees(theta), 0));
 
 	auto dist = FVector::DistXY(GetActorLocation(), targetLocation);
 
 	if (dist < .01f)
 	{
+		auto oldIndex = CurrentTargetIndex;
 		CurrentTargetIndex = (CurrentTargetIndex + 1) % MovementTargets.Num();
 	}
 }

@@ -21,5 +21,9 @@
       <string>D:\Github\Agile\Agile\Source\Agile\PlayerSeenByActorComponent.cpp</string>
       <string>D:\Github\Agile\Agile\Source\Agile\PlayerSeenByActorComponent.h</string>
     </ArrayOfString>
+    <ArrayOfString>
+      <string>D:\Github\Agile\Agile\Source\Agile\TargetNode.cpp</string>
+      <string>D:\Github\Agile\Agile\Source\Agile\TargetNode.h</string>
+    </ArrayOfString>
   </ArrayOfArrayOfString>
 </ArrayOfArrayOfArrayOfString>
